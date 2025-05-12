@@ -9,16 +9,18 @@ const FetchUsers = ({refresh}) => {
   const [editEmail, setEditEmail] = useState("");
   const [searchUser, setSearchUser] = useState("");
 
+
   const fetchUserData = async () => {
       try {
         const response = await axios.get("http://localhost:3000/getUsers");
-        // console.log(response.data.users);
+
         setUserData(response.data.users);
       }
       catch (err) {
         console.log(err);
       }
     }
+
 
   useEffect(() => {
     fetchUserData();
@@ -76,11 +78,12 @@ const FetchUsers = ({refresh}) => {
       {userData.length > 0 ?
         <>
         <div className='mx-[20%] my-4'>
-            <input type="text" className='w-[100%] border border-gray-700 p-1 px-6 focus:outline-none focus:border-red-600'
+            <input type="text" className='w-[100%] border border-gray-700 p-1 px-6 focus:outline-none focus:border-red-500'
             value={searchUser}
             onChange={(e) => setSearchUser(e.target.value)}
             onKeyUp={handleSearch}
             />
+
         </div>
         <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mx-[20%] mb-10">
 
@@ -123,7 +126,9 @@ const FetchUsers = ({refresh}) => {
                       </>
                       :
                       <>
-                        <button className="btn btn-soft btn-info" onClick={() => handleEdit(user)}>Edit</button>
+                        <button className="btn btn-soft btn-info" onClick={() => handleEdit(user)}>
+                          Update
+                        </button>
                         <button className="btn btn-soft btn-error" onClick={() => handleDelete(user._id)}>Delete</button>
                       </>
                     }
